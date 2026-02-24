@@ -3,8 +3,10 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
-// Load environment variables
-dotenv.config();
+// Load environment variables ONLY in development
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // Connect to MongoDB
 connectDB();
