@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://todo-app-726j.onrender.com',
+    baseURL: 'https://todo-app-726j.onrender.com/api',
 });
 
 // Add a request interceptor to attach JWT token to auth requests
