@@ -1,8 +1,5 @@
 const Task = require('../models/Task');
-
-// @desc    Get tasks for logged in user
-// @route   GET /api/tasks
-// @access  Private
+
 exports.getTasks = async (req, res) => {
     try {
         const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1 });
@@ -16,13 +13,10 @@ exports.getTasks = async (req, res) => {
         res.status(400).json({ success: false, error: error.message });
     }
 };
-
-// @desc    Create new task
-// @route   POST /api/tasks
-// @access  Private
+
 exports.createTask = async (req, res) => {
     try {
-        // Add user to req.body
+       
         req.body.user = req.user.id;
 
         const task = await Task.create(req.body);
@@ -35,10 +29,7 @@ exports.createTask = async (req, res) => {
         res.status(400).json({ success: false, error: error.message });
     }
 };
-
-// @desc    Update task
-// @route   PUT /api/tasks/:id
-// @access  Private
+
 exports.updateTask = async (req, res) => {
     try {
         let task = await Task.findById(req.params.id);
@@ -47,7 +38,7 @@ exports.updateTask = async (req, res) => {
             return res.status(404).json({ success: false, error: 'Task not found' });
         }
 
-        // Make sure user owns task
+       
         if (task.user.toString() !== req.user.id) {
             return res.status(401).json({ success: false, error: 'Not authorized to update this task' });
         }
@@ -65,10 +56,7 @@ exports.updateTask = async (req, res) => {
         res.status(400).json({ success: false, error: error.message });
     }
 };
-
-// @desc    Delete task
-// @route   DELETE /api/tasks/:id
-// @access  Private
+
 exports.deleteTask = async (req, res) => {
     try {
         const task = await Task.findById(req.params.id);
@@ -77,7 +65,7 @@ exports.deleteTask = async (req, res) => {
             return res.status(404).json({ success: false, error: 'Task not found' });
         }
 
-        // Make sure user owns task
+       
         if (task.user.toString() !== req.user.id) {
             return res.status(401).json({ success: false, error: 'Not authorized to delete this task' });
         }

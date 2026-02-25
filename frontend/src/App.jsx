@@ -7,7 +7,6 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Spinner from './components/Spinner';
 
-// Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = React.useContext(AuthContext);
 
@@ -17,7 +16,6 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
-// Public Route Component (redirects to dashboard if already logged in)
 const PublicRoute = ({ children }) => {
   const { user, loading } = React.useContext(AuthContext);
 
